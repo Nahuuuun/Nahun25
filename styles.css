@@ -1,0 +1,641 @@
+/* styles.css - Versión final restaurada y limpia */
+
+/* GLOBAL */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  background:#000;
+  color:#f5f5f5;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* NAVBAR (unificado para todas las páginas) */
+.navbar{
+  width:100%;
+  background:linear-gradient(145deg,#111,#1a1a1a);
+  border-bottom:3px solid #8B0000;
+  position:sticky;
+  top:0;
+  z-index:999;
+  box-shadow:0 4px 8px rgba(0,0,0,0.25);
+}
+.navbar .container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:12px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.logo{
+  color:#fff;
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:1px;
+  position:relative;
+  transition:color .3s ease;
+}
+/* brillo suave al hover (destello que desaparece lentamente) */
+.logo::after{
+  content:"";
+  position:absolute;
+  top:0; left:-120%;
+  width:120%; height:100%;
+  background:linear-gradient(120deg,transparent, rgba(255,255,255,0.45), transparent);
+  transform:skewX(-20deg);
+  opacity:0;
+  transition: all .7s cubic-bezier(.2,.9,.2,1);
+}
+.logo:hover::after{
+  left:100%;
+  opacity:1;
+}
+/* ================= HEADER & MENU RESPONSIVE ================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  backdrop-filter: none;
+  background: linear-gradient(145deg,#111,#1a1a1a); /* tu estilo */
+  border-bottom: 3px solid #8B0000;
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.site-title {
+  color:#fff;
+  font-weight:700;
+  letter-spacing:1px;
+  font-size:18px;
+}
+
+/* botón del menú (icono) */
+.menu-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor:pointer;
+  padding:8px;
+}
+
+/* overlay: oscurece y aplica blur suave */
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .28s ease, visibility .28s;
+  z-index: 1100;
+}
+
+/* SIDE MENU (desktop / large) */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 0; /* closed */
+  max-width: 70%;
+  background: rgba(20,20,20,0.98); /* negro translúcido */
+  color: #fff;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  overflow: auto;
+  transition: width .35s cubic-bezier(.2,.9,.2,1), transform .35s ease, opacity .35s ease;
+  transform: translateX(10%);
+  opacity: 0;
+  z-index: 1150;
+  padding: 28px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* cuando abierto */
+.side-menu.open {
+  width: 70%;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* cerrar X */
+.close-side {
+  align-self:flex-end;
+  background: transparent;
+  color:#fff;
+  font-size:30px;
+  border:0;
+  cursor:pointer;
+  margin-bottom:6px;
+}
+
+/* lista del menu */
+.menu-list {
+  list-style:none;
+  padding: 8px 0;
+  margin: 12px 0 40px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+.menu-list li a {
+  color:#fff;
+  text-decoration:none;
+  font-size:20px;
+  padding:12px 18px;
+  width:100%;
+  text-align:center;
+  border-radius:8px;
+  transition: background .18s ease, transform .12s ease;
+}
+.menu-list li a:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateX(4px);
+}
+
+/* MOBILE DROPDOWN (small screens) — hidden on desktop */
+.mobile-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: rgba(20,20,20,0.98);
+  color:#fff;
+  overflow:hidden;
+  max-height: 0;
+  opacity:0;
+  visibility:hidden;
+  transition: max-height .35s ease, opacity .28s ease;
+  z-index:1130;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+}
+.mobile-dropdown.open {
+  max-height: 400px; /* suficiente para los items */
+  opacity:1;
+  visibility:visible;
+}
+
+.mobile-menu-list { list-style:none; margin:0; padding:10px 6px; display:flex; flex-direction:column; gap:8px; align-items:center;}
+.mobile-menu-list a { color:#fff; text-decoration:none; padding:10px 14px; font-size:16px; width:95%; text-align:center; border-radius:8px;}
+.mobile-menu-list a:hover { background: rgba(255,255,255,0.04); transform: translateY(0); }
+
+/* RESPONSIVE BEHAVIOR */
+/* En pantallas anchas: usar side-menu y ocultar mobile dropdown */
+@media (min-width: 900px) {
+  .mobile-dropdown { display:none !important; }
+  .side-menu { display:flex; }
+}
+
+/* En pantallas pequeñas: ocultar side-menu y usar dropdown */
+@media (max-width: 899px) {
+  .side-menu { display:none; }
+  .mobile-dropdown { display:block; position:relative; }
+}
+
+/* Ajustes visuales adicionales */
+@media (min-width:1200px) {
+  .side-menu { max-width: 480px; } /* no demasiado grande en pantallas enormess */
+}
+
+/* accesibilidad: focus */
+.menu-btn:focus, .close-side:focus, .icono-red:focus { outline: 3px solid rgba(139,0,0,0.12); outline-offset: 2px; }
+
+
+/* HERO / PARALLAX */
+.hero{background:url('dionisio.jpg') center/cover fixed;padding:150px 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:0}
+.hero h2,.hero p{position:relative;z-index:1}
+.historia-hero{background-image:url('dionisio.jpg');background-attachment:fixed;background-position:center;background-size:cover;padding:140px 20px}
+.actividades-hero{background-image:url('fondo.jpg');background-attachment:fixed;background-position:center;background-size:cover;padding:140px 20px}
+.historia-hero::before,.actividades-hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
+
+/* SECCIONES: CARRERAS / ORGANIZACIÓN / HISTORIA INSTITUCIÓN */
+.section-box{padding:60px 20px;max-width:1000px;margin:auto;background-color:rgba(0,0,0,.85);border-top:3px solid #8B0000;border-bottom:3px solid #8B0000;border-radius:8px}
+#carreras .title,#organizacion .title,#historia-institucion .title{color:#c5c5c5;border-bottom:2px solid #c5c5c5;display:inline-block;margin-bottom:18px}
+.carreras{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.carrera{border:1px solid #222;border-radius:10px;padding:20px;background:#1a1a1a;transition:transform .3s,box-shadow .3s}
+.carrera:hover{transform:translateY(-5px);border-color:#c5c5c5;box-shadow:0 4px 15px rgba(139,0,0,.12)}
+.carrera h3{color:#c5c5c5}
+
+/* ACTIVIDADES: layout alternado y animación */
+.actividades-container{max-width:1100px;margin:60px auto;padding:0 20px;display:flex;flex-direction:column;gap:72px}
+.actividad{display:flex;gap:40px;align-items:center;opacity:0;transform:translateY(40px);transition:opacity .75s ease,transform .75s ease}
+.actividad.visible{opacity:1;transform:translateY(0)}
+.actividad-texto{flex:1 1 420px;min-width:260px;max-width:560px}
+.actividad-texto h2{color:#8B0000;margin-bottom:10px}
+.actividad-texto p{color:#ddd;line-height:1.7}
+.actividad-imagen{flex:1 1 420px;display:flex;align-items:center;justify-content:center}
+.actividad-imagen img{width:100%;max-width:520px;height:320px;object-fit:cover;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,.45);transition:transform .35s}
+.actividad-imagen img:hover{transform:scale(1.03)}
+.actividad.reverse{flex-direction:row-reverse}
+
+/* RESPONSIVE */
+@media(max-width:980px){.actividad{gap:28px}.actividad-imagen img{height:260px;max-width:460px}}
+@media(max-width:700px){.actividad{flex-direction:column;text-align:center}.actividad.reverse{flex-direction:column}.actividad-imagen img{width:90%;height:auto;max-height:420px}}
+
+/* ENTRY ANIMATION - carga de página */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.page-enter{animation:fadeUp .9s ease-out both}
+
+/* utilidades */
+.center{display:flex;align-items:center;justify-content:center}
+
+/* ===== HISTORIA DEL PRÓCER ===== */
+.historia-page {
+  background-color: #0d0d0d;
+  color: #e6e6e6;
+}
+
+.historia-detalle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 40px;
+  background: rgba(20, 20, 20, 0.95);
+  border-top: 3px solid #8B0000;
+  border-bottom: 3px solid #8B0000;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.historia-imagen img {
+  width: 420px;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+  border: 3px solid #8B0000;
+}
+
+.historia-texto {
+  flex: 1;
+  text-align: justify;
+}
+
+.historia-texto h3 {
+  color: #8B0000;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+}
+
+.historia-texto p {
+  margin-bottom: 14px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #dcdcdc;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .historia-detalle {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .historia-imagen img {
+    width: 85%;
+    margin-bottom: 20px;
+  }
+
+  .historia-texto {
+    text-align: left;
+  }
+}
+/* ===== INTRO ACTIVIDADES ===== */
+.intro-actividades {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(0,0,0,0.55);
+  border-bottom: 3px solid #c5c5c5;
+}
+.intro-actividades h2 {
+  color: #c5c5c5;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+.intro-actividades p {
+  color: #ddd;
+  font-size: 18px;
+}
+
+/* ===== GALERÍA DE ACTIVIDADES ===== */
+.galeria-actividades {
+  padding: 50px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+.galeria-grid img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease;
+}
+.galeria-grid img:hover {
+  transform: scale(1.03);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  .galeria-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media(max-width:600px) {
+  .galeria-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+/* ===== MODAL / LIGHTBOX ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.85);
+}
+
+.modal-contenido {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.cerrar {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* Fondo parallax para la página de actividades */
+.actividades-page {
+    background: url('fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+}
+/* ANIMACIÓN DE ENTRADA FADE-UP */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Estado inicial: oculto y abajo */
+.galeria-grid img {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Cuando aparece en pantalla */
+.galeria-grid img.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================= */
+/* ANIMACIÓN GLOBAL DE ENTRADA   */
+/* ============================= */
+html.page-enter body {
+  animation: pageFadeUp 1s ease both;
+}
+
+@keyframes pageFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================= */
+/* ANIMACIÓN FADE-UP POR SECCIÓN */
+/* ============================= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================= */
+/* MODAL PARA IMÁGENES (GALERÍA) */
+/* ============================= */
+.modal-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-img img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.modal-img:active {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* ============================= */
+/* AJUSTE PARA FONDO GLOBAL      */
+/* ============================= */
+body {
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+/* ==== ANIMACIÓN FADE-UP ==== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ====== FOOTER ====== */
+.footer {
+  background: #000;
+  padding: 30px 0;
+  text-align: center;
+  color: #fff;
+  margin-top: 40px;
+}
+
+.footer-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-redes {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-icon {
+  width: 40px;
+  height: 40px;
+  background: #0a2a5e; /* Azul oscuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  font-size: 18px;
+  color: white;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.footer-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.3);
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #ddd;
+}
+
+/* --- MENÚ GENERAL --- */
+.navbar {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 15px 0;
+}
+
+.logo {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* --- MENÚ EN PC --- */
+@media (min-width: 769px) {
+  .menu {
+    display: flex;
+    margin-left: auto;
+  }
+
+  #menu-toggle {
+    display: none;
+  }
+}
+
+/* --- MENÚ HAMBURGUESA EN MÓVIL --- */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  nav#nav-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    height: 100%;
+    width: 260px;
+    background: white;
+    transition: 0.3s;
+    padding-top: 60px;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+  }
+
+  nav#nav-menu.open {
+    right: 0;
+  }
+
+  #menu-toggle {
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  /* Desenfoque del fondo */
+  body.blur {
+    filter: blur(4px);
+    transition: 0.3s;
+  }
+}
+
+/* Links móviles */
+@media (max-width: 768px) {
+  .menu li a {
+    color: black;
+    padding: 10px 0;
+    display: block;
+  }
+}

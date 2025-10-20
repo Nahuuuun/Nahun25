@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head >
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institución Dionisio de Herrera</title>
+
+  <style>
+        html { scroll-behavior: auto; }
+  </style>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="container">
+      <div class="logo">INSTITUTO DIONISIO DE HERRERA</div>
+
+      <!-- Botón Hamburguesa -->
+      <div class="menu-toggle" id="menu-toggle">☰ Menú</div>
+
+      <!-- Menú Principal -->
+      <nav id="nav-menu">
+        <ul class="menu">
+          <li><a href="actividades.html">ACTIVIDADES EXTRACURRICULARES</a></li>
+          <li><a href="historia.html">HISTORIA DEL PRÓCER</a></li>
+          <li><a href="#historia-institucion">HISTORIA DE LA INSTITUCIÓN</a></li>
+          <li><a href="#organizacion">ORGANIZACIÓN</a></li>
+          <li><a href="#carreras">CARRERAS</a></li>
+          <li><a href="#contacto">CONTACTO</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero fade-up" id="inicio">
+  <h2 class="fade-up">Bienvenidos a la Institución Dionisio de Herrera</h2>
+  <p>Nuestra Institución tiene la intención de formar líderes con valores, disciplina y excelencia académica.</p>
+</section>
+
+
+<section id="historia-institucion" class="section-box fade-up">
+  <h2>Historia de la Institución</h2>
+  <div class="historia-institucion-cuadro">
+    <p>
+      El instituto DIONISIO DE HERRERA fue fundado en octubre del año 1993, con el ideal de darle a la juventud de Ciudad Capital la oportunidad de recibir calidad educativa, basándose en la disciplina, valores morales, espirituales y culturales.
+    </p>
+
+    <p>
+      Con más de 20 años de funcionamiento, el Instituto Dionisio de Herrera ha formado a hombres y mujeres que hoy en día contribuyen con el desarrollo de nuestra Nación.
+      Nuestro instituto cuenta con personal capacitado, egresados de la Universidad Pedagógica.
+    </p>
+
+    <p>
+      Bajo una nueva administración dirigida por la <strong>Lic. Haydee Cerrato</strong> como Gerente General, la <strong>Lic. Michelle Ortega</strong> como Rectora, el <strong>Lic. Juan Carlos Castillo</strong> como Director
+    </p>
+
+    <p>
+      Dicha institución cuenta con una población aproximada de 300 estudiantes. Estamos ubicados en Barrio Abajo, a media cuadra de la Iglesia El Calvario, cerca del Teatro Manuel Bonilla.
+    </p>
+  </div>
+</section>
+
+<!-- CARRERAS -->
+<section id="carreras" class="section-box fade-up">
+  <h2>Carreras</h2>
+  <div class="carreras">
+    <div class="carrera">
+      <h3>Ciclo Común</h3>
+      <p>Base educativa sólida que fortalece las competencias generales de los estudiantes antes de su formación diversificada.</p>
+    </div>
+    <div class="carrera">
+      <h3>Bachillerato en Ciencias y Humanidades</h3>
+      <p>Un enfoque integral para formar estudiantes críticos, reflexivos y preparados para la educación superior.</p>
+    </div>
+    <div class="carrera">
+      <h3>Bachillerato Técnico en Informática</h3>
+      <p>Preparación tecnológica y práctica para el mundo moderno, con conocimientos en programación, redes y hardware.</p>
+    </div>
+    <div class="carrera">
+      <h3>Bachillerato Técnico en Contaduría</h3>
+      <p>Formación en finanzas, contabilidad y administración económica.</p>
+    </div>
+  </div>
+</section>
+
+<section id="organizacion" class="section-box fade-up">
+  <h2>Organización Institucional</h2>
+  <div class="carreras">
+    <div class="carrera">
+      <h3>Administración General</h3>
+      <p>Encargada de la gestión y supervisión de todas las áreas académicas y administrativas del instituto.</p>
+    </div>
+    <div class="carrera">
+      <h3>Orientación y Psicología</h3>
+      <p>Brinda acompañamiento emocional y académico a los estudiantes, fomentando su bienestar integral.</p>
+    </div>
+    <div class="carrera">
+      <h3>Coordinación Académica</h3>
+      <p>Dirige la planificación de los programas de estudio y la organización del personal docente.</p>
+    </div>
+    <div class="carrera">
+      <h3>Consejería Estudiantil</h3>
+      <p>Apoya a los alumnos en la toma de decisiones vocacionales y en la resolución de conflictos educativos.</p>
+    </div>
+  </div>
+</section>
+ 
+<script>
+(function(){
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  };
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // ---- Animación inicial: reiniciar todas las .fade-up para que animen al entrar
+    const fadeItems = document.querySelectorAll('.fade-up');
+    fadeItems.forEach((el) => {
+      el.classList.remove('visible');   // limpieza por si quedó
+      // Forzar reflow para reiniciar transición si ya existía
+      void el.offsetWidth;
+      // Añadir la clase visible con pequeño retraso para ver el efecto
+      setTimeout(() => el.classList.add('visible'), 80);
+    });
+
+    const galleryImgs = document.querySelectorAll('.galeria-grid img');
+    if (galleryImgs.length) {
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible'); 
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+
+      galleryImgs.forEach(img => {
+                obs.observe(img);
+      });
+    }
+  });
+})();
+</script>
+<!-- ========== FOOTER ========== -->
+<footer id="contacto" class="footer">
+  <div class="footer-contenido">
+    <div class="footer-redes">
+      <!-- Google Maps -->
+      <a href="https://maps.app.goo.gl/CpgSw4L3Dig5Z5wZ8" target="_blank" class="footer-icon">
+        <i class="fas fa-map-marker-alt"></i>
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/dionisio.herrera.55/" target="_blank" class="footer-icon">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <!-- WhatsApp -->
+      <a href="https://wa.me/50433901979" target="_blank" class="footer-icon">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+s
+
+    </div>
+
+    <p class="footer-text">
+      © 2025 Institución Dionisio de Herrera — Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav-menu');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    document.body.classList.toggle('blur');
+  });
+</script>
+
+</body>
+</html>
+

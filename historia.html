@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <style>
+html {
+    scroll-behavior: auto;
+}
+</style>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historia - Dionisio de Herrera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="historia-page">
+
+    <header>
+   <div class="navbar">
+    <div class="container">
+      <div class="logo">INSTITUTO DIONISIO DE HERRERA</div>
+      <ul class="menu">
+          <li><a href="index.html">INICIO</a></li>
+           <li><a href="historia.html"class="activo">HISTORIA DEL PROCER </a></li>
+          <li><a href="actividades.html">ACTIVIDADES EXTRACURRICULARES</a></li>
+       
+    
+  </header>
+  <section class="hero historia-hero">
+    <h2  class="fade-up">Historia del Prócer Dionisio de Herrera</h2>
+    <p  class="fade-up">Conoce la vida y legado del ilustre fundador del Estado de Honduras.</p>
+  </section>
+
+  <section class="historia-detalle">
+    <div class="historia-imagen">
+      <img  class="fade-up" src="dionisio2.jpg" alt="Prócer Dionisio de Herrera">
+    </div>
+
+    <div class="historia-texto">
+      <h3>José Dionisio de Herrera y Díaz del Valle</h3>
+      <p>
+        Nacido en <strong>Choluteca, Honduras (1781)</strong>, fue un destacado político y prócer hondureño, considerado uno de los fundadores del Estado de Honduras. 
+        Estudió en la Universidad de San Carlos de Guatemala, donde adquirió una sólida formación humanística y jurídica.
+      </p>
+      <p>
+        En <strong>1824</strong> se convirtió en el primer Jefe de Estado de Honduras tras la independencia de Centroamérica, promulgando la primera Constitución del país en 1825. 
+        Promovió la educación, la justicia y la organización del Estado bajo los principios republicanos.
+      </p>
+      <p>
+        También fue Jefe de Estado de Nicaragua y un firme defensor de los ideales de libertad, legalidad y soberanía nacional. 
+        Su legado perdura como símbolo de patriotismo, sabiduría y servicio a la nación hondureña.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+  <center>  <p>&copy; 2025 Institución Dionisio de Herrera — Todos los derechos reservados.</p></center>
+  </footer>
+ 
+<script>
+// Siempre iniciar arriba al refrescar
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+};
+
+// Forzar animación nuevamente al recargar
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector('.fade-up');
+  hero.classList.remove('fade-up');
+  void hero.offsetWidth; // Reiniciar animación
+  hero.classList.add('fade-up');
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Forzar scroll al inicio al recargar
+    window.scrollTo(0, 0);
+
+    const images = document.querySelectorAll('.galeria-grid img');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    images.forEach(img => {
+        observer.observe(img);
+    });
+});
+</script>
+
+</body>
+</html>

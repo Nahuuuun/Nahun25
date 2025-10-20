@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Contáctanos — Instituto Dionisio de Herrera</title>
+
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* CSS pequeño local (si lo prefieres en styles.css, muévelo ahí) */
+    .contact-body {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .contact-card {
+      width: 100%;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      background: rgba(255,255,255,0.95);
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .contact-left { padding: 6px 10px; }
+    .contact-left h2 { margin: 0 0 10px; color: #222; }
+    .contact-left p { color: #444; line-height:1.5; }
+
+    .contact-form { display:flex; flex-direction:column; gap:12px; }
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.12);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.04) inset;
+      font-size:15px;
+      resize:vertical;
+      min-height:44px;
+    }
+    .contact-form textarea { min-height:130px; }
+
+    .contact-form button {
+      background:#8B0000;
+      color:#fff;
+      border:0;
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(139,0,0,0.18);
+    }
+    .socials { display:flex; gap:12px; margin-top:12px; }
+    .socials a { display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:#f1f1f1; color:#333; text-decoration:none; font-size:18px; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+
+    .map-wrapper iframe { width:100%; height:100%; border-radius:8px; border:0; min-height:280px; }
+
+    /* responsive */
+    @media (max-width:900px) {
+      .contact-card { grid-template-columns: 1fr; }
+      .map-wrapper iframe { min-height:260px; }
+    }
+
+    /* mensaje de resultado */
+    .form-msg { padding:12px 14px; border-radius:10px; display:none; }
+    .form-msg.success { background:#e6ffef; color:#08310a; border:1px solid #b7f0cb; }
+    .form-msg.error   { background:#fff0f0; color:#5a0a0a; border:1px solid #f0b7b7; }
+  </style>
+</head>
+<body class="contacto-page">
+
+  <!-- header (usa tu navbar ya existente) -->
+  <header>
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">Institución Dionisio de Herrera</div>
+        <div class="menu-toggle">☰</div>
+        <nav>
+          <ul class="menu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="historia.html">Historia del Prócer</a></li>
+            <li><a href="actividades.html">Actividades</a></li>
+            <li><a href="contacto.html" class="activo">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero fade-up" style="padding:80px 20px; text-align:center;">
+      <h1 class="fade-up">Estamos aquí para ayudarte</h1>
+      <p class="fade-up">Si tienes dudas o quieres más información, escríbenos y te responderemos pronto.</p>
+    </section>
+
+    <section class="contact-body">
+      <div class="contact-card fade-up">
+        <div class="contact-left">
+          <h2>Contacto</h2>
+          <p>Puedes escribirnos y con gusto te atenderemos. También puedes visitarnos en Barrio Abajo, Tegucigalpa.</p>
+
+          <div class="socials">
+            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+
+          <div style="margin-top:18px;">
+            <strong>Correo:</strong> <br>
+            <a href="mailto:educacionmedia011@yahoo.com">educacionmedia011@yahoo.com</a>
+          </div>
+        </div>
+
+        <div>
+          <!-- FORM: posta a send_mail.php (opcion PHP) -->
+          <form id="contactForm" class="contact-form" method="post" action="send_mail.php">
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <input type="email" name="email" placeholder="Tu correo" required>
+            <textarea name="mensaje" placeholder="Tu mensaje..." required></textarea>
+
+            <input type="hidden" name="redirect" value="contacto.html">
+            <button type="submit">Enviar mensaje</button>
+
+            <div id="formMsg" class="form-msg" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-wrapper fade-up" style="max-width:1100px;margin:30px auto;padding:0 20px;">
+      <!-- Google Maps embed: usaremos tu enlace (embed por URL). Si prefieres usar un iframe con lat/lng, reemplaza src -->
+      <iframe src="https://www.google.com/maps?q=Barrio%20Abajo%20Tegucigalpa&output=embed" loading="lazy"></iframe>
+    </section>
+  </main>
+
+  <footer style="padding:30px 20px;text-align:center;">
+    <p>&copy; 2025 Institución Dionisio de Herrera — Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- SCRIPTS: usa tu script.js global; aquí añado la lógica para mostrar el mensaje tras submit -->
+  <script src="script.js"></script>
+
+  <script>
+    // Manejo de la respuesta (si usas send_mail.php y este redirige con ?ok=1)
+    (function(){
+      // Mostrar mensajes de la query string (opcional)
+      const params = new URLSearchParams(window.location.search);
+      const formMsg = document.getElementById('formMsg');
+      if (params.get('ok') === '1') {
+        formMsg.textContent = 'Gracias por tu mensaje. Te responderemos pronto.';
+        formMsg.className = 'form-msg success';
+        formMsg.style.display = 'block';
+        history.replaceState(null, '', location.pathname); // limpiar query
+      } else if (params.get('ok') === '0') {
+        formMsg.textContent = 'Ocurrió un error al enviar. Intenta de nuevo más tarde.';
+        formMsg.className = 'form-msg error';
+        formMsg.style.display = 'block';
+        history.replaceState(null, '', location.pathname);
+      }
+
+      // Opcional: AJAX submit (si prefieres no recargar la página)
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', function(e){
+        // Si quieres enviar via AJAX en lugar de action=send_mail.php, descomenta este bloque
+        // e.preventDefault();
+        // const fd = new FormData(form);
+        // fetch('send_mail.php', { method:'POST', body: fd })
+        //  .then(r=>r.json()).then(data => { ... })
+        //  .catch(()=>{ ... });
+      });
+    })();
+  </script>
+</body>
+</html>

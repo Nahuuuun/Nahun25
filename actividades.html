@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <style>
+html {
+    scroll-behavior: auto;
+}
+</style>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividades Extracurriculares</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="actividades-page">
+
+<div id="modal-img" class="modal">
+  <span class="cerrar">&times;</span>
+  <img class="modal-contenido" id="img-ampliada">
+</div>
+
+
+<header>
+  <div class="navbar">
+    <div class="container">
+      <div class="logo">Institución Dionisio de Herrera</div>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="historia.html">Historia del Prócer</a></li>
+          <li><a href="actividades.html" class="activo">Actividades Extracurriculares</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="intro-actividades fade-up">
+  <h2>Actividades Extracurriculares</h2>
+  <p>Las actividades extracurriculares fortalecen el carácter, el compañerismo y el espíritu institucional.</p>
+</section>
+
+
+<section class="galeria-actividades">
+  <div class="galeria-grid">
+    <img src="1.jpg" alt="Actividad 1">
+    <img src="2.jpg" alt="Actividad 2">
+    <img src="3.jpg" alt="Actividad 3">
+    <img src="4.jpg" alt="Actividad 4">
+    <img src="5.jpg" alt="Actividad 5">
+    <img src="6.jpg" alt="Actividad 6">
+    <img src="7.jpg" alt="Actividad 7">
+    <img src="8.jpg" alt="Actividad 8">
+    <img src="9.jpg" alt="Actividad 9">
+  </div>
+</section>
+
+<footer>
+ <center> <p>&copy; 2025 Institución Dionisio de Herrera — Todos los derechos reservados.</p></center>
+</footer>
+<!-- MODAL PARA VER IMAGEN COMPLETA -->
+<div id="modal-img" class="modal">
+  <span class="cerrar">&times;</span>
+  <img class="modal-contenido" id="img-ampliada">
+</div>
+
+<script>
+  const modal = document.getElementById("modal-img");
+  const modalImg = document.getElementById("img-ampliada");
+  const imgs = document.querySelectorAll(".galeria-grid img");
+  const cerrar = document.querySelector(".cerrar");
+
+  imgs.forEach(img => {
+    img.addEventListener("click", () => {
+      modal.style.display = "block";
+      modalImg.src = img.src;
+    });
+  });
+
+  cerrar.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+</script>
+<script>
+// Siempre iniciar arriba al refrescar
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+};
+
+// Forzar animación nuevamente al recargar
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector('.fade-up');
+  hero.classList.remove('fade-up');
+  void hero.offsetWidth; // Reiniciar animación
+  hero.classList.add('fade-up');
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Forzar scroll al inicio al recargar
+    window.scrollTo(0, 0);
+
+    const images = document.querySelectorAll('.galeria-grid img');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    images.forEach(img => {
+        observer.observe(img);
+    });
+});
+</script>
+
+</body>
+</html>
