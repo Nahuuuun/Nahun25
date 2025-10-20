@@ -559,43 +559,47 @@ body {
   color: #ddd;
 }
 
-/* --- MENÚ GENERAL --- */
+/* Estilos generales */
 .navbar {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 15px 0;
+  background: #003366;
+  color: white;
+  padding: 15px;
 }
 
 .logo {
-  color: white;
-  font-weight: bold;
   font-size: 20px;
+  font-weight: bold;
 }
 
+/* Menú de escritorio */
 .menu {
-  list-style: none;
   display: flex;
   gap: 20px;
+}
+
+.menu li {
+  list-style: none;
 }
 
 .menu li a {
   color: white;
   text-decoration: none;
+  font-weight: bold;
 }
 
-/* --- MENÚ EN PC --- */
-@media (min-width: 769px) {
-  .menu {
-    display: flex;
-    margin-left: auto;
-  }
-
-  #menu-toggle {
-    display: none;
-  }
+/* Botón hamburguesa (oculto en PC) */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 18px;
 }
+
 /* --- MENÚ HAMBURGUESA EN MÓVIL --- */
 @media (max-width: 768px) {
-  /* Ocultar menú por defecto en móvil */
+  .menu-toggle {
+    display: block;
+  }
+
   .menu {
     display: none;
     flex-direction: column;
@@ -612,37 +616,22 @@ body {
     transition: 0.3s;
     padding-top: 60px;
     box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-    z-index: 999; /* Para que quede sobre el contenido */
+    z-index: 999;
   }
 
-  /* Cuando se abre el menú */
   nav#nav-menu.open {
     right: 0;
   }
 
-  /* Icono del menú */
-  #menu-toggle {
-    color: white;
-    cursor: pointer;
-    font-size: 24px;
-    z-index: 1000;
-  }
-}
-
-/* Links en móvil */
-@media (max-width: 768px) {
-  .menu li {
-    list-style: none;
-    margin: 10px 0;
+  nav#nav-menu.open .menu {
+    display: flex;
   }
 
   .menu li a {
     color: black;
-    padding: 10px 0;
+    padding: 15px 0;
     display: block;
     font-size: 18px;
     text-decoration: none;
   }
 }
-
-
