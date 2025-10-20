@@ -593,9 +593,9 @@ body {
     display: none;
   }
 }
-
 /* --- MENÚ HAMBURGUESA EN MÓVIL --- */
 @media (max-width: 768px) {
+  /* Ocultar menú por defecto en móvil */
   .menu {
     display: none;
     flex-direction: column;
@@ -612,30 +612,37 @@ body {
     transition: 0.3s;
     padding-top: 60px;
     box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+    z-index: 999; /* Para que quede sobre el contenido */
   }
 
+  /* Cuando se abre el menú */
   nav#nav-menu.open {
     right: 0;
   }
 
+  /* Icono del menú */
   #menu-toggle {
     color: white;
     cursor: pointer;
-    font-size: 18px;
-  }
-
-  /* Desenfoque del fondo */
-  body.blur {
-    filter: blur(4px);
-    transition: 0.3s;
+    font-size: 24px;
+    z-index: 1000;
   }
 }
 
-/* Links móviles */
+/* Links en móvil */
 @media (max-width: 768px) {
+  .menu li {
+    list-style: none;
+    margin: 10px 0;
+  }
+
   .menu li a {
     color: black;
     padding: 10px 0;
     display: block;
+    font-size: 18px;
+    text-decoration: none;
   }
 }
+
+
