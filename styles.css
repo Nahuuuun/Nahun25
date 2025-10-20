@@ -561,7 +561,7 @@ body {
 
 /* Estilos generales */
 .navbar {
-  background: #003366;
+  background: ##c5c5c5;
   color: white;
   padding: 15px;
 }
@@ -635,3 +635,4 @@ body {
     text-decoration: none;
   }
 }
+
