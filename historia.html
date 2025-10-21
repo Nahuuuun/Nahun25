@@ -13,18 +13,25 @@ html {
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="historia-page">
-
-    <header>
-   <div class="navbar">
+<header>
+  <div class="navbar">
     <div class="container">
       <div class="logo">INSTITUTO DIONISIO DE HERRERA</div>
-      <ul class="menu">
-          <li><a href="index.html">INICIO</a></li>
-           <li><a href="historia.html"class="activo">HISTORIA DEL PROCER </a></li>
+
+      <!-- Botón Hamburguesa -->
+      <div class="menu-toggle" id="menu-toggle">☰ Menú</div>
+
+      <!-- Menú Principal -->
+      <nav id="nav-menu"> 
+        <ul class="menu">
           <li><a href="actividades.html">ACTIVIDADES EXTRACURRICULARES</a></li>
-       
-    
-  </header>
+          <li><a href="index.html">INICIO</a></li>
+         
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
   <section class="hero historia-hero">
     <h2  class="fade-up">Historia del Prócer Dionisio de Herrera</h2>
     <p  class="fade-up">Conoce la vida y legado del ilustre fundador del Estado de Honduras.</p>
@@ -95,3 +102,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
